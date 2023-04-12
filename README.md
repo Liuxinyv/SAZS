@@ -64,14 +64,14 @@ Download the top K=5 eigenvectors of the Laplacian matrix of image features from
 
  To test the trained model with its checkpoint:
 
-
->CUDA_VISIBLE_DEVICES=0  python train.py test
->                --arch {drn_d_105, vitl16_384}  
->                --fold {0, 1, 2, 3}  --batch_size 1 
->                --benchmark {pascal, coco}
->                --eig_dir ./datasets/{pascal, coco}_k5/
->                --resume "path_to_trained_model/best_model.pt"
-
+'''bash
+CUDA_VISIBLE_DEVICES=0  python train.py test
+                --arch {drn_d_105, vitl16_384}  
+                --fold {0, 1, 2, 3}  --batch_size 1 
+                --benchmark {pascal, coco}
+                --eig_dir ./datasets/{pascal, coco}_k5/
+                --resume "path_to_trained_model/best_model.pt"
+'''
 
 
 
