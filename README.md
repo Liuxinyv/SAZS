@@ -51,13 +51,14 @@ Download the top K=5 eigenvectors of the Laplacian matrix of image features from
 
 #### Training 
 
->CUDA_VISIBLE_DEVICES=0,1,2,3  python train.py train
->                --arch {drn_d_105, vitl16_384}  
->                --fold {0, 1, 2, 3}  --batch_size 6
->                --random-scale 2 --random-rotate 10 
->                --lr 0.0002 --drate 0.9 --lr-mode poly
->                --benchmark {pascal, coco}
-
+```bash
+CUDA_VISIBLE_DEVICES=0,1,2,3  python train.py train
+                --arch {drn_d_105, vitl16_384}  
+                --fold {0, 1, 2, 3}  --batch_size 6
+                --random-scale 2 --random-rotate 10 
+                --lr 0.0002 --drate 0.9 --lr-mode poly
+                --benchmark {pascal, coco}
+```
 
 
 #### Evaluating
