@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Delving into Shape-aware Zero-shot Semantic Segmentation
 
 
@@ -235,3 +236,6 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
 </table>
 
 
+=======
+# SAZS
+>>>>>>> 49220b6dee86af1c33d704e4656131b8f0bc21c9
