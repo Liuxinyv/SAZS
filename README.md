@@ -42,13 +42,13 @@ The ./datasets/ folder should have the following hierarchy:
         
 
 #### Eigenvector 
-Download the top K=5 eigenvectors of the Laplacian matrix of image features from [HERE](labelmaterial.s3.amazonaws.com/release/iiw_dataset-release-0.zip). Unzip it directly and merge them with the current ./datasets/pascal_k5/  and  ./datasets/coco_k5/ folder
+Download the top K=5 eigenvectors of the Laplacian matrix of image features from [HERE](https://drive.google.com/file/d/1VOsj2E4hfCcfISC71A08xc4mil0iJ-lq/view?usp=sharing). Unzip it directly and merge them with the current ./datasets/pascal_k5/  and  ./datasets/coco_k5/ folder
 
 ## Training and evaluating
 
 #### Training 
 
->CUDA_VISIBLE_DEVICES=0,1,2,3  python sazs.py train
+>CUDA_VISIBLE_DEVICES=0,1,2,3  python train.py train
 >                --arch {drn_d_105, vitl16_384}  
 >                --fold {0, 1, 2, 3}  --batch_size 6
 >                --random-scale 2 --random-rotate 10 
@@ -62,7 +62,7 @@ Download the top K=5 eigenvectors of the Laplacian matrix of image features from
  To test the trained model with its checkpoint:
 
 
->CUDA_VISIBLE_DEVICES=0  python sazs.py test
+>CUDA_VISIBLE_DEVICES=0  python train.py test
 >                --arch {drn_d_105, vitl16_384}  
 >                --fold {0, 1, 2, 3}  --batch_size 1 
 >                --benchmark {pascal, coco}
@@ -75,7 +75,7 @@ Download the top K=5 eigenvectors of the Laplacian matrix of image features from
 
 
 ## Pretrained model
-You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.com/s/15OgcaOSwDpAEO6XRu-IdyA?pwd=x9w0) (extract code: x9w0) and our corresponding pre-trained models are available as follows:. 
+You can download our corresponding pre-trained models as follows:. 
 
 ##### PASCAL-5<sup>i</sup>
 <table>
@@ -87,7 +87,6 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>Text Encoder</th>
       <th>mIoU</th>
       <th>URL</th>
-      <th>Extract Code</th>
     </tr>
   </thead>
   <tbody>
@@ -97,8 +96,7 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>ViT-L/16</th>
       <th>ViT-B/32</th>
       <th>62.7</th>
-      <td><a href="https://pan.baidu.com/s/1fmH6g-RgKtWWuRNJSqzJjg?pwd=uvki">download</a></td>
-      <th>uvki</th>
+      <td><a href="https://pan.baidu.com/s/1BNx4ONrc3eCoTSGAYGTxVg?pwd=9uey">download</a></td>
     </tr>
     <tr>
        <th>PASCAL</th>
@@ -106,8 +104,7 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>ViT-L/16</th>
       <th> ViT-B/32</th>
       <th>64.3</th>
-      <td><a href="https://pan.baidu.com/s/1XmT31qoCGkQo3m_-pM9x2w?pwd=udnq">download</a></td>
-      <th>udnq</th>
+      <td><a href="https://pan.baidu.com/s/1QC1JF6gcKQjOJQWXm0ZCBw?pwd=dfv8">download</a></td>
     </tr>
     <tr>
        <th>PASCAL</th>
@@ -115,8 +112,7 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>ViT-L/16</th>
       <th>ViT-B/32</th>
       <th>60.6</th>
-      <td><a href="https://pan.baidu.com/s/1GD3wS3OhfLcW4xNT3OIA1Q?pwd=yh37">download</a></td>
-      <th>yh37</th>
+      <td><a href="https://pan.baidu.com/s/1fO4HWowLW64aM3ypV2r1tA?pwd=iji7">download</a></td>
     </tr>
     <tr>
        <th>PASCAL</th>
@@ -124,8 +120,7 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>ViT-L/16</th>
       <th> ViT-B/32</th>
       <th>50.2</th>
-      <td><a href="https://pan.baidu.com/s/15u8bC5y8rx2IHGT0zkPlHg?pwd=8wp3">download</a></td>
-      <th>8wp3</th>
+      <td><a href="https://pan.baidu.com/s/1FBHoNRKWbPOFoYdHTn3UAg?pwd=f59i">download</a></td>
   </tbody>
 </table>
 
@@ -139,7 +134,6 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>Text Encoder</th>
       <th>mIoU</th>
       <th>URL</th>
-      <th>Extract Code</th>
     </tr>
   </thead>
   <tbody>
@@ -150,8 +144,7 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>ViT-L/16</th>
       <th>ViT-B/32</th>
       <th>33.8</th>
-      <td><a href="https://pan.baidu.com/s/1MUeYzHsY7l5jeXNA2HWlQw?pwd=z531">download</a></td>
-      <th>z531</th>
+      <td><a href="https://pan.baidu.com/s/12ipVxYeUCONIHuVNrLSOcg?pwd=0inf">download</a></td>
     </tr>
     <tr>
        <th>COCO</th>
@@ -159,8 +152,7 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>ViT-L/16</th>
       <th>ViT-B/32</th>
       <th>38.1</th>
-      <td><a href="https://pan.baidu.com/s/1CEGnwy79dT5AxVpfdt2n2g?pwd=hjcw">download</a></td>
-       <th>hjcw</th>
+      <td><a href="https://pan.baidu.com/s/14hN50E-JeMiCf4BM3TG0ng?pwd=83q1">download</a></td>
     </tr>
     <tr>
        <th>COCO</th>
@@ -168,8 +160,7 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>ViT-L/16</th>
       <th>ViT-B/32</th>
       <th>34.4</th>
-      <td><a href="https://pan.baidu.com/s/10TSDLmy2N-Qrhl9GMS7M7w?pwd=kghz">download</a></td>
-      <th>kghz</th>
+      <td><a href="https://pan.baidu.com/s/17UceK2X55nRldbdf6bzz1g?pwd=dxjp">download</a></td>
     </tr>
     <tr>
        <th>COCO</th>
@@ -177,8 +168,7 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>ViT-L/16</th>
       <th>ViT-B/32</th>
       <th>35.0</th>
-      <td><a href="https://pan.baidu.com/s/1AVjTMW4aM1s0qBblH16RDA?pwd=60uo">download</a></td>
-       <th>60uo</th>
+      <td><a href="https://pan.baidu.com/s/1R4BtG3Hcy30Vi0oNSaLzLg?pwd=b2r0">download</a></td>
       </tbody>
 </table>
 
@@ -191,7 +181,6 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
       <th>Text Encoder</th>
       <th>mIoU</th>
       <th>URL</th>
-      <th>Extract Code</th>
     </tr>
   </thead>
   <tbody>
@@ -201,35 +190,33 @@ You can download the pre-trained shapenet model from  [HERE](https://pan.baidu.c
        <td>0</td>
       <th>DRN</th>
       <th>ViT-B/32</th>
-      <th>33.8</th>
+      <th>34.2</th>
       <td><a href="https://pan.baidu.com/s/1MUeYzHsY7l5jeXNA2HWlQw?pwd=z531">download</a></td>
-      <th>z531</th>
     </tr>
     <tr>
        <th>COCO</th>
        <td>1</td>
       <th>DRN</th>
       <th>ViT-B/32</th>
-      <th>38.1</th>
+      <th>36.5</th>
       <td><a href="https://pan.baidu.com/s/1CEGnwy79dT5AxVpfdt2n2g?pwd=hjcw">download</a></td>
-       <th>hjcw</th>
     </tr>
     <tr>
        <th>COCO</th>
        <td>2</td>
       <th>DRN</th>
       <th>ViT-B/32</th>
-      <th>34.4</th>
+      <th>34.6</th>
       <td><a href="https://pan.baidu.com/s/10TSDLmy2N-Qrhl9GMS7M7w?pwd=kghz">download</a></td>
-      <th>kghz</th>
     </tr>
     <tr>
        <th>COCO</th>
        <td>3</td>
       <th>DRN</th>
       <th>ViT-B/32</th>
-      <th>35.0</th>
+      <th>35.6</th>
       <td><a href="https://pan.baidu.com/s/1AVjTMW4aM1s0qBblH16RDA?pwd=60uo">download</a></td>
-       <th>60uo</th>
       </tbody>
 </table>
+
+
