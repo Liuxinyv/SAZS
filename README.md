@@ -12,8 +12,11 @@ Thanks to the impressive progress of large-scale vision-language pretraining, re
 
 ### Requirements
 torch==1.7.1
+
 torchvision==0.8.2 
+
 timm==0.4.12
+
 opencv-python==4.1.1
 
 
