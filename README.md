@@ -50,7 +50,8 @@ Download the top K=5 eigenvectors of the Laplacian matrix of image features from
 ## Training and evaluating
 
 #### Training 
-#####PASCAL-5<sup>i</sup>
+
+##### PASCAL-5<sup>i</sup>
 > ```bash
 >CUDA_VISIBLE_DEVICES=0,1,2,3  python pascal_vit.py train
 >                --arch vitl16_384
@@ -73,7 +74,8 @@ Download the top K=5 eigenvectors of the Laplacian matrix of image features from
 
  To test the trained model with its checkpoint:
 
-#####PASCAL-5<sup>i</sup>
+##### PASCAL-5<sup>i</sup>
+
 > ```bash 
 >CUDA_VISIBLE_DEVICES=0  python pascal_vit.py test
 >                --arch vitl16_384
