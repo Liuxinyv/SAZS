@@ -617,7 +617,7 @@ def parse_args():
     parser.add_argument('cmd', choices=['train', 'test'])
     parser.add_argument('-d', '--data-dir', default=None)
     parser.add_argument('--eig_dir', default=None)
-    parser.add_argument('--filename', default='/DATA_EDS/liuxy/SAZS/output/',type=str)
+    parser.add_argument('--filename', default='./output/',type=str)
     parser.add_argument('-c', '--classes', default=2, type=int)
     parser.add_argument('-s', '--crop-size', default=512, type=int)
     parser.add_argument('--step', type=int, default=200)
