@@ -57,7 +57,7 @@ Download the top K=5 eigenvectors of the Laplacian matrix of image features from
 >                --arch vitl16_384
 >                --fold {0, 1, 2, 3}  --batch_size 6
 >                --random-scale 2 --random-rotate 10 
->                --lr 0.001  --drate 0.95 --lr-mode poly
+>                --lr 0.001  --lr-mode poly
 >                --benchmark pascal
 >```
 ##### COCO-20<sup>i</sup> 
@@ -66,7 +66,7 @@ Download the top K=5 eigenvectors of the Laplacian matrix of image features from
 >                --arch vitl16_384
 >                --fold {0, 1, 2, 3}  --batch_size 6
 >                --random-scale 2 --random-rotate 10 
->                --lr 0.0002 --drate 0.95  --lr-mode poly
+>                --lr 0.0002  --lr-mode poly
 >                --benchmark coco
 >```
 
