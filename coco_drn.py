@@ -91,97 +91,6 @@ def fill_up_weights(up):
     for c in range(1, w.size(0)):
         w[c, 0, :, :] = w[0, 0, :, :]
 
-# class DRNSeg(nn.Module):
-#     def __init__(self, model_name, args, pretrained_model=None,
-#                  pretrained=True, use_torch_up=False):
-#         super(DRNSeg, self).__init__()
-#         model = drn.__dict__.get(model_name)(
-#             pretrained=pretrained, num_classes=1000)
-#         pmodel = nn.DataParallel(model)
-#         # self.has_edge_head=args.has_edge_head
-#         if pretrained_model is not None:
-#             pmodel.load_state_dict(pretrained_model)
-#         self.base = nn.Sequential(*list(model.children())[:-2])
-#         self.classes=2
-#         self.pool1 = nn.AdaptiveAvgPool2d(1)
-#         self.pool2 = nn.AdaptiveAvgPool2d(2)
-#         self.pool3 = nn.AdaptiveAvgPool2d(3)
-#         self.pool6 = nn.AdaptiveAvgPool2d(6)
-#
-#         self.pool1_conv = nn.Conv2d(model.out_dim, 512, kernel_size=1, bias=False)
-#         self.pool1_bn = nn.BatchNorm2d(512)
-#         self.pool2_conv = nn.Conv2d(model.out_dim, 512, kernel_size=1, bias=False)
-#         self.pool2_bn = nn.BatchNorm2d(512)
-#         self.pool3_conv = nn.Conv2d(model.out_dim, 512, kernel_size=1, bias=False)
-#         self.pool3_bn = nn.BatchNorm2d(512)
-#         self.pool6_conv = nn.Conv2d(model.out_dim, 512, kernel_size=1, bias=False)
-#         self.pool6_bn = nn.BatchNorm2d(512)
-#
-#         self.fc1 = nn.Conv2d(2560, 512, kernel_size=3, padding=1, bias=False)
-#         self.fc1_bn = nn.BatchNorm2d(512)
-#         self.drop = nn.Dropout2d(args.drate)#0.9/0.1
-#         self.fc2 = nn.Conv2d(512, self.classes, kernel_size=1, bias=False)
-#         self.softmax = nn.LogSoftmax()
-#         self.relu = nn.ReLU(inplace=True)
-#         self.edgeocr_cls_head = nn.Conv2d(
-#             512, 1, kernel_size=1, stride=1, padding=0,
-#             bias=True)
-#         if use_torch_up:
-#             self.up = nn.UpsamplingBilinear2d(scale_factor=8)
-#         else:
-#             up = nn.ConvTranspose2d(self.classes, self.classes, 16, stride=8, padding=4,
-#                                     output_padding=0, groups=self.classes,
-#                                     bias=False)
-#             fill_up_weights(up)
-#             up.weight.requires_grad = False
-#             self.up = up
-#
-#     def forward(self, image):
-#         # x = self.base(image.to('cuda'))
-#         x = self.base(image)
-#         s = x.data.cpu().shape
-#         x1 = self.relu(self.pool1_bn(self.pool1_conv(self.pool1(x))))
-#         x1 = nn.functional.upsample(input=x1, size=(s[2], s[3]), mode='bilinear')
-#         x2 = self.relu(self.pool2_bn(self.pool2_conv(self.pool2(x))))
-#         x2 = nn.functional.upsample(input=x2, size=(s[2], s[3]), mode='bilinear')
-#         x3 = self.relu(self.pool3_bn(self.pool3_conv(self.pool3(x))))
-#         x3 = nn.functional.upsample(input=x3, size=(s[2], s[3]), mode='bilinear')
-#         x6 = self.relu(self.pool6_bn(self.pool6_conv(self.pool6(x))))
-#         x6 = nn.functional.upsample(input=x6, size=(s[2], s[3]), mode='bilinear')
-#         x = torch.cat([x, x1, x2, x3, x6], 1)
-#         x = self.relu(self.fc1_bn(self.fc1(x)))
-#         x = self.drop(x)
-#
-#         return self.softmax(x), x
-#
-#     def optim_base_parameters(self, memo=None):
-#         for param in self.base.parameters():
-#             yield param
-#
-#     def optim_seg_parameters(self, memo=None):
-#         for param in self.pool1_conv.parameters():
-#             yield param
-#         for param in self.pool2_conv.parameters():
-#             yield param
-#         for param in self.pool3_conv.parameters():
-#             yield param
-#         for param in self.pool6_conv.parameters():
-#             yield param
-#         for param in self.pool1_bn.parameters():
-#             yield param
-#         for param in self.pool2_bn.parameters():
-#             yield param
-#         for param in self.pool3_bn.parameters():
-#             yield param
-#         for param in self.pool6_bn.parameters():
-#             yield param
-#         for param in self.fc1.parameters():
-#             yield param
-#         for param in self.fc1_bn.parameters():
-#             yield param
-#         for param in self.fc2.parameters():
-#             yield param
-
 class DRNSeg(nn.Module):
     def __init__(self, model_name, args, pretrained_model=None,
                  pretrained=True, use_torch_up=False):
@@ -839,11 +748,11 @@ def parse_args():
     parser.add_argument('cmd', choices=['train', 'test'])
     parser.add_argument('-d', '--data-dir', default=None)
     parser.add_argument('--eig_dir', default=None)
-    parser.add_argument('--filename', default="/DATA_EDS/liuxy/Cerberus/output/",type=str)
-    parser.add_argument('-c', '--classes', default=0, type=int)
-    parser.add_argument('-s', '--crop-size', default=0, type=int)
+    parser.add_argument('--filename', default="./output/",type=str)
+    parser.add_argument('-c', '--classes', default=2, type=int)
+    parser.add_argument('-s', '--crop-size', default=512, type=int)
     parser.add_argument('--step', type=int, default=200)
-    parser.add_argument('--arch')
+    parser.add_argument('--arch',choices=['vitla6_384', 'drn_d_105'],default='drn_d_105')
     parser.add_argument('--fold', type=int, choices=[0,1,2,3], default=0)
     parser.add_argument('--drate', type=float, default=0.9)
     parser.add_argument('--batch_size', type=int, default=6, metavar='N',
@@ -873,7 +782,7 @@ def parse_args():
     parser.add_argument('--bn-sync', action='store_true')
     parser.add_argument('--with-gt', action='store_true')
     parser.add_argument('--test-suffix', default='', type=str)
-    parser.add_argument('--benchmark', type=str, default='coco', choices=['pascal', 'coco', 'fss'])
+    parser.add_argument('--benchmark', type=str, default='coco', choices=['pascal', 'coco'])
     parser.add_argument('--logpath', type=str, default='')
     parser.add_argument('--load', type=str, default='')
     parser.add_argument('--ran', type=int, default=random.randint(0, 10000))
