@@ -51,42 +51,46 @@ Download the top K=5 eigenvectors of the Laplacian matrix of image features from
 
 #### Training 
 #####PASCAL-5<sup>i</sup>
+> ```bash
 >CUDA_VISIBLE_DEVICES=0,1,2,3  python pascal_vit.py train
 >                --arch vitl16_384
 >                --fold {0, 1, 2, 3}  --batch_size 6
 >                --random-scale 2 --random-rotate 10 
 >                --lr 0.001  --drate 0.95 --lr-mode poly
 >                --benchmark pascal
+>```
 ##### COCO-20<sup>i</sup> 
->                
+> ```bash           
 >CUDA_VISIBLE_DEVICES=0,1,2,3  python coco_vit.py train
 >                --arch vitl16_384
 >                --fold {0, 1, 2, 3}  --batch_size 6
 >                --random-scale 2 --random-rotate 10 
 >                --lr 0.0002 --drate 0.95  --lr-mode poly
 >                --benchmark coco
-
+>```
 
 #### Evaluating
 
  To test the trained model with its checkpoint:
 
 #####PASCAL-5<sup>i</sup>
+> ```bash 
 >CUDA_VISIBLE_DEVICES=0  python pascal_vit.py test
 >                --arch vitl16_384
 >                --fold {0, 1, 2, 3}  --batch_size 1 
 >                --benchmark pascal
 >                --eig_dir ./datasets/VOC2012/pascal_k5/
 >                --resume "path_to_trained_model/best_model.pt"
-
+>```
 ##### COCO-20<sup>i</sup> 
+> ```bash 
 >CUDA_VISIBLE_DEVICES=0  python coco_vit.py test
 >                --arch vitl16_384
 >                --fold {0, 1, 2, 3}  --batch_size 1 
 >                --benchmark coco
 >                --eig_dir ./datasets/COCO2014/coco_k5/
 >                --resume "path_to_trained_model/best_model.pt"
-
+>```
 
 
 
