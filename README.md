@@ -11,13 +11,13 @@ Thanks to the impressive progress of large-scale vision-language pretraining, re
 ## Installation
 
 ### Requirements
-torch==1.7.1
+   torch=1.7.1
 
-torchvision==0.8.2 
+   torchvision=0.8.2 
 
-timm==0.4.12
+   clip=1.0
 
-opencv-python==4.1.1
+   timm=0.4.12
 
 
 ### Data preparation
