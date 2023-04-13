@@ -27,52 +27,26 @@ class DatasetCOCO(Dataset):
         self.img_metadata = self.build_img_metadata()
 
     def __len__(self):
-        print(len(self.img_metadata), self.split)
         return len(self.img_metadata) if self.split == 'trn' else 1000
 
     def __getitem__(self, idx):
         # ignores idx during training & testing and perform uniform sampling over object classes to form an episode
         # (due to the large size of the COCO dataset)
         query_img, query_mask, support_imgs, support_masks, query_name, support_names, class_sample, org_qry_imsize = self.load_frame()
-        # print(idx,class_sample,query_name)
         data = []
         data.append(query_img)
         data.append(query_mask)
         data = list(self.transform(*data))
-        if self.has_edge_head:
-            _edgemap = data[1].clone()
-            _edgemap = _edgemap.numpy()
-            _edgemap = self.mask_to_onehot(_edgemap, self.nclass)
-            _edgemap = self.onehot_to_binary_edges(_edgemap, 2, self.nclass)
-            edgemap = torch.from_numpy(_edgemap).float()
-            data.append(edgemap)
-
-        # data.append(class_sample)
-        # if self.phase == 'test':
-        #     data.append(query_name)
-        # return tuple(data)
-
-        # query_img = self.transform(query_img)
-        # query_mask = query_mask.float()
-        # if not self.use_original_imgsize:
-        #     query_mask = F.interpolate(query_mask.unsqueeze(0).unsqueeze(0).float(), query_img.size()[-2:], mode='nearest').squeeze()
-        # if self.shot:
-        #     support_imgs = torch.stack([self.transform(support_img) for support_img in support_imgs])
-        #     for midx, smask in enumerate(support_masks):
-        #         support_masks[midx] = F.interpolate(smask.unsqueeze(0).unsqueeze(0).float(), support_imgs.size()[-2:], mode='nearest').squeeze()
-        #     support_masks = torch.stack(support_masks)
-        #
-
-        if self.has_edge_head:
-            batch = {'query_img': data[0],
-                     'query_mask': data[1],
-                     'edge_gts':data[2],
-                     'query_name': query_name,
-                     'class_id': torch.tensor(class_sample)}
-        else:
-            batch = {'query_img': data[0],
-                     'query_mask': data[1],
-                     'query_name': query_name,
+        _edgemap = data[1].clone()
+        _edgemap = _edgemap.numpy()
+        _edgemap = self.mask_to_onehot(_edgemap, self.nclass)
+        _edgemap = self.onehot_to_binary_edges(_edgemap, 2, self.nclass)
+        edgemap = torch.from_numpy(_edgemap).float()
+        data.append(edgemap)
+        batch = {'query_img': data[0],
+                 'query_mask': data[1],
+                 'edge_gts':data[2],
+                 'query_name': query_name,
                      'class_id': torch.tensor(class_sample)}
 
         return batch
