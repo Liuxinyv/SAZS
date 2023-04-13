@@ -82,11 +82,11 @@ def validate(args,val_loader,val_dataset, model, criterion, eval_score=None, pri
             target = target.cuda()
             ignore = ignore.cuda()
             input_var = torch.autograd.Variable(input, volatile=True)
-            features = model(input_var)
+            _,features = model(input_var)
             text_features = [lmodel.encode_text(texts[class_i]).detach() for class_i in class_sample]
             text_features = torch.cat([pred for pred in text_features]).reshape(int(target.size(0)), 2, 512)
             text_features = text_features.to(torch.float32)
-            result = torch.einsum('abcd,aeb->aecd', (features[0], text_features))
+            result = torch.einsum('abcd,aeb->aecd', (features, text_features))
             tempsoftmax = nn.LogSoftmax()
             result = tempsoftmax(result)
 
@@ -621,7 +621,7 @@ def parse_args():
     parser.add_argument('-c', '--classes', default=2, type=int)
     parser.add_argument('-s', '--crop-size', default=512, type=int)
     parser.add_argument('--step', type=int, default=200)
-    parser.add_argument('--arch')
+    parser.add_argument('--arch',choices=['vitl16_384', 'drn_d_105'],type=str)
     parser.add_argument('--fold', type=int, default=0)
     parser.add_argument('--batch_size', type=int, default=6, metavar='N',
                         help='input batch size for training (default: 6)')
@@ -652,9 +652,6 @@ def parse_args():
                         help='Turn on multi-scale testing')
     parser.add_argument('--with-gt', action='store_true')
     parser.add_argument('--test-suffix', default='', type=str)
-    parser.add_argument('--has_edge_head', default='True')
-    parser.add_argument('--save_vis', default='True', type=str)
-    parser.add_argument('--visualize', action='store_true', default=True)
     parser.add_argument('--benchmark', default='pascal',choices=['pascal', 'coco'])
     args = parser.parse_args()
 
@@ -669,7 +666,6 @@ def parse_args():
     return args
 args = parse_args()
 FORMAT = "[%(asctime)-15s %(filename)s:%(lineno)d %(funcName)s] %(message)s"
-# logging.basicConfig(format=FORMAT)
 if args.cmd == 'train':
     logging.basicConfig(format=FORMAT,filename=os.path.join(args.filename, 'd_'+str(args.crop_size)+'_'+ args.arch+ '_f'+str(args.fold) +'_s' + str(args.lr) +'_B'+ str(args.batch_size)+'.log'))
 elif args.cmd == 'test':
