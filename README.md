@@ -45,7 +45,7 @@ The ./datasets/ folder should have the following hierarchy:
         
 
 #### Eigenvector 
-Download the top K=5 eigenvectors of the Laplacian matrix of image features from [HERE](https://drive.google.com/file/d/1VOsj2E4hfCcfISC71A08xc4mil0iJ-lq/view?usp=sharing). Unzip it directly and merge them with the current ./datasets/pascal_k5/  and  ./datasets/coco_k5/ folder
+Download the top K=5 eigenvectors of the Laplacian matrix of image features from [HERE](https://drive.google.com/file/d/1VOsj2E4hfCcfISC71A08xc4mil0iJ-lq/view?usp=sharing). Unzip it directly and merge them with the current ./datasets/VOC2012/pascal_k5/  and  ./datasets/COCO2014/coco_k5/ folder
 
 ## Training and evaluating
 
