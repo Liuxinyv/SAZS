@@ -1,5 +1,6 @@
 # Delving into Shape-aware Zero-shot Semantic Segmentation
 
+Xinyu Liu, Beiwen Tian, Zhen Wang, Rui Wang, Kehua Sheng, Bo Zhang, Hao Zhao, Guyue Zhou
 
 Paper Accepted to CVPR 2023.
 
